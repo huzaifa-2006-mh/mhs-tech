@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon: #bdf24a;
+  --primary: #bdf24a;
+}
+
+body {
+  background-color: #2d3d2a;
+  color: #ffffff;
+  background-image: none;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-4xl md:text-5xl font-black mb-8 relative inline-block uppercase tracking-tighter;
+  }
+
+  .btn {
+    @apply px-8 py-4 font-black uppercase tracking-widest text-xs transition-all duration-300 transform hover:-translate-y-1;
+  }
+
+  .btn-primary {
+    @apply bg-neon text-black hover:bg-white shadow-lg shadow-neon/20;
+  }
+
+  .btn-outline {
+    @apply border-2 border-neon text-neon hover:bg-neon hover:text-black;
+  }
+}

@@ -57,7 +57,12 @@ export default function Contact() {
 
             {/* Contact Form */}
             <div className="bg-[#1e2a1c] p-10 md:p-16 border border-white/5 rounded-[3rem] shadow-2xl">
-               <form action="https://formspree.io/f/mqakaynd" method="POST" className="space-y-8">
+               <form action="https://api.web3forms.com/submit" method="POST" className="space-y-8">
+                  {/* Get your Access Key from https://web3forms.com/ */}
+                  <input type="hidden" name="access_key" value="721b03b2-d7d7-4e8b-b996-5ef51259c345" />
+                  <input type="hidden" name="from_name" value="MHS Tech Website" />
+                  <input type="hidden" name="subject" value="New Inquiry from MHS Tech" />
+
                   <div className="space-y-2">
                      <label className="text-[10px] font-black uppercase tracking-widest text-gray-300 ml-2">Your Name</label>
                      <input type="text" name="name" required className="w-full bg-[#2d3d2a] border border-white/10 rounded-xl px-6 py-4 text-white focus:border-neon focus:outline-none transition-all" placeholder="John Doe" />
@@ -73,6 +78,9 @@ export default function Contact() {
                   <button type="submit" className="w-full py-5 bg-neon text-black font-black uppercase tracking-widest text-sm hover:scale-105 transition-all shadow-xl shadow-neon/10">
                      Send Message
                   </button>
+                  <p className="text-[10px] text-gray-500 text-center mt-4">
+                    Note: Replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com
+                  </p>
                </form>
             </div>
           </div>

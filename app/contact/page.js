@@ -1,9 +1,39 @@
-export const metadata = {
-  title: 'Contact MHS Tech – Software House in Karachi',
-  description: 'Looking for the best software house in Karachi? Contact MHS Tech today for professional web development, SEO, and digital services.'
-};
+'use client';
+import { useState } from 'react';
 
 export default function Contact() {
+  const [status, setStatus] = useState(''); // 'loading', 'success', 'error'
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+    
+    const formData = new FormData(e.target);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: json
+      });
+      const result = await response.json();
+      if (result.success) {
+        setStatus('success');
+        e.target.reset();
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.log(error);
+      setStatus('error');
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#2d3d2a] pt-28">
       <section className="py-24 border-b border-white/5">
@@ -56,9 +86,8 @@ export default function Contact() {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-[#1e2a1c] p-10 md:p-16 border border-white/5 rounded-[3rem] shadow-2xl">
-               <form action="https://api.web3forms.com/submit" method="POST" className="space-y-8">
-                  {/* Get your Access Key from https://web3forms.com/ */}
+            <div className="relative bg-[#1e2a1c] p-10 md:p-16 border border-white/5 rounded-[3rem] shadow-2xl overflow-hidden">
+               <form onSubmit={handleSubmit} className="space-y-8">
                   <input type="hidden" name="access_key" value="721b03b2-d7d7-4e8b-b996-5ef51259c345" />
                   <input type="hidden" name="from_name" value="MHS Tech Website" />
                   <input type="hidden" name="subject" value="New Inquiry from MHS Tech" />
@@ -75,12 +104,33 @@ export default function Contact() {
                      <label className="text-[10px] font-black uppercase tracking-widest text-gray-300 ml-2">Message</label>
                      <textarea name="message" required className="w-full bg-[#2d3d2a] border border-white/10 rounded-xl px-6 py-4 text-white focus:border-neon focus:outline-none transition-all h-40 resize-none" placeholder="How can we help you reach your goals?"></textarea>
                   </div>
-                  <button type="submit" className="w-full py-5 bg-neon text-black font-black uppercase tracking-widest text-sm hover:scale-105 transition-all shadow-xl shadow-neon/10">
-                     Send Message
+                  
+                  <button 
+                    type="submit" 
+                    disabled={status === 'loading'}
+                    className={`w-full py-5 bg-neon text-black font-black uppercase tracking-widest text-sm hover:scale-105 transition-all shadow-xl shadow-neon/10 disabled:opacity-50`}
+                  >
+                    {status === 'loading' ? 'Sending...' : 'Send Message'}
                   </button>
-                  <p className="text-[10px] text-gray-500 text-center mt-4">
-                    Note: Replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com
-                  </p>
+
+                  {/* Success Popup/Overlay */}
+                  {status === 'success' && (
+                    <div className="absolute inset-0 bg-[#1e2a1c] flex flex-col items-center justify-center p-10 text-center animate-in fade-in zoom-in duration-500">
+                      <div className="w-20 h-20 rounded-full bg-neon/10 flex items-center justify-center text-neon text-4xl mb-6 shadow-2xl shadow-neon/20">✓</div>
+                      <h3 className="text-3xl font-black text-white uppercase italic mb-4">Message Sent!</h3>
+                      <p className="text-gray-300 mb-8">Thank you for reaching out. Our team will contact you shortly.</p>
+                      <button 
+                        onClick={() => setStatus('')}
+                        className="text-neon text-[10px] font-black uppercase tracking-widest border-b border-neon/30 hover:border-neon transition-all"
+                      >
+                        Send Another Message
+                      </button>
+                    </div>
+                  )}
+
+                  {status === 'error' && (
+                    <p className="text-red-400 text-xs text-center mt-4">Something went wrong. Please try again or common via WhatsApp.</p>
+                  )}
                </form>
             </div>
           </div>

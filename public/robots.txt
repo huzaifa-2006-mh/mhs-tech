@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mhs-tech.vercel.app/sitemap.xml
+Sitemap: https://mhs-tech-alpha.vercel.app/sitemap.xml

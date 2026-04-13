@@ -13,7 +13,7 @@ export const metadata = {
   openGraph: {
     title: "MHS Tech | Premium Software House in Karachi",
     description: "Innovating digital solutions with MHS Tech - Your partner in Web Development and SEO.",
-    url: "https://mhs-tech.vercel.app",
+    url: "https://mhs-tech-alpha.vercel.app",
     siteName: "MHS Tech",
     locale: "en_US",
     type: "website",

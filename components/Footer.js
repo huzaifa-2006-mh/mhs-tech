@@ -39,7 +39,7 @@ export default function Footer() {
             <div className="space-y-4 text-sm text-gray-400 mb-8">
               <p className="flex items-center gap-2"><span>📍</span> Karachi, Pakistan</p>
               <p className="flex items-center gap-2"><span>✉️</span> mhsoftwarehouse77@gmail.com</p>
-              <p className="flex items-center gap-2"><span>📞</span> +92 3152931751</p>
+              <p className="flex items-center gap-2"><span>📞</span> +92 315 8067492</p>
             </div>
             <div className="flex gap-4">
               {[
